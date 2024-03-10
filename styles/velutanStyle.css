@@ -1,0 +1,101 @@
+#character-tools-target > div > div.character-builder-inner{display:none;}
+
+div.mm-mega-menu {
+  display: none;
+}
+.character-builder.character-builder-step_by_step.character-builder--dice-enabled
+div.site-bar {
+    display: none;
+}
+div.site-bar {
+    display: none;
+}
+main {
+    display: none;
+    background-color: 00982b!important;
+}
+#site-main {
+    padding-top: 0 !important;
+    background-color: #00982b;
+}
+footer {
+    display: none;
+}
+body { overflow: hidden; }
+.dice-rolling-panel .dice-toolbar {
+    margin-left: 30%;
+}
+
+div.noty_layout {
+    top: -9px;
+    right: 66%;
+    z-index: 1; 
+}
+
+.noty_theme__valhalla-min{
+  display: none;
+}
+
+div.dice_notification_controls {
+  display: none;
+}
+
+div.dice_result {
+  background: url('https://i.imgur.com/Yq9mXUT.png');
+  background-repeat: no-repeat;
+  background-size: 278px 116px;
+  min-height: 116px;
+  min-width: 278px;
+  overflow-wrap: break-word;
+  
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  & span{
+    color: black;
+    font-weight: 800;
+  }
+}
+
+.dice_result__info__title > span{
+  display: none;
+}
+
+span.dice_result__divider.dice_result__divider-- {
+  display: none;
+}
+
+.dice_result__info__results > span.dice-icon-die.dice-icon-die--d20 {
+  padding-left: 25px;
+  background-color: darkred;
+}
+
+span.dice_result__info__breakdown {
+  font-size: 19px;
+  display: inline-block;
+  max-width: 100px;
+  color: black;
+  overflow: initial;
+  overflow-wrap: anywhere;
+  white-space: normal;
+  line-height: 1;
+  
+}
+
+div.dice_result__info__results {
+  margin-top: 20px;
+  margin-left: 3px;
+}
+span.dice_resulttotal-result.dice_resulttotal-result {
+text-align: center;
+}
+
+.dice_result__total-container {
+  padding-left: 0px; 
+  padding-right: 0px;
+  width: 100px;
+}
+
+span.dice_result__info__dicenotation {
+   margin-left: 3px;
+}
