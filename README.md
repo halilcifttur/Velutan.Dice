@@ -2,7 +2,7 @@
 
 Chrome extension developed for use in Swaggybark's Velutan FRP live stream. The extension turns the background green for the dice rolled on the character page on the D&D Beyond site, edits the notification window that includes the information about the dice rolled, adapts it to the Velutan theme, and when the user-specified hotkey is pressed, automatically rolls d20 and d12 dices.
 
-![](https://i.imgur.com/5ikKMWd.png)
+![](https://i.imgur.com/OmyIXRm.png)
 
 ![](https://i.imgur.com/X7dtnzg.png)
 

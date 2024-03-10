@@ -26,9 +26,37 @@ body {
 }
 input {
     width: 5%;
+    border: 2px solid #000000;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    background-color: #2c2c2c;
+    color: #ffffff;
+}
+input::placeholder {
+    color: #ffffff;
+}
+input:focus {
+    border-color: #000000;
+    box-shadow: 0 0 5px #000000;
 }
 label {
     margin-top: 2px;
     font-weight: bold;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+button {
+    background-color: #2c2c2c;
+    color: #ffffff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    margin-right: -5px;
+}
+button:hover {
+    background-color: #000000;
+    box-shadow: 0 0 5px #000000;
 }
