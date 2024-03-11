@@ -44,12 +44,38 @@ document.addEventListener('keydown', function(event) {
     });
 });
 
+chrome.storage.local.get(['cssEnabled'], function(result) {
+    if (result.hasOwnProperty('cssEnabled') && result.cssEnabled) {
+        injectCustomCSS();
+    } else {
+        removeCustomCSS();
+    }
+});
+
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    if (request.action === "toggleCSS") {
+        console.log('CSS Aktif Edildi Mi?', request.enable);
+        if (request.enable) {
+            injectCustomCSS();
+        } else {
+            removeCustomCSS();
+        }
+    }
+});
+
 function injectCustomCSS() {
+    const cssFilePath = chrome.runtime.getURL('css/velutanStyle.css');
     const link = document.createElement('link');
-    link.href = chrome.runtime.getURL('styles/velutanStyle.css');
-    link.type = 'text/css';
-    link.rel = 'stylesheet';
+    link.setAttribute('id', 'customInjectedCSS');
+    link.setAttribute('rel', 'stylesheet');
+    link.setAttribute('type', 'text/css');
+    link.setAttribute('href', cssFilePath);
     document.head.appendChild(link);
 }
 
-injectCustomCSS();
+function removeCustomCSS() {
+    const cssLink = document.getElementById('customInjectedCSS');
+    if (cssLink) {
+        cssLink.remove();
+    }
+}

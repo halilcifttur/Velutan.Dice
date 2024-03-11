@@ -2,7 +2,7 @@ function saveOptions() {
     const d20ShortcutKey = document.getElementById('d20ShortcutKey').value;
     const d12ShortcutKey = document.getElementById('d12ShortcutKey').value;
     const clearShortcutKey = document.getElementById('clearShortcutKey').value;
-
+    
     if (d20ShortcutKey === clearShortcutKey) {
         alert('d20 Zar Kısayol Tuşu ile Zar Bilgisi Temizleme Kısayol Tuşu aynı olamaz. Başka bir tuş atamayı deneyin.');
         return;
@@ -23,7 +23,7 @@ function saveOptions() {
         d12ShortcutKey: d12ShortcutKey,
         clearShortcutKey: clearShortcutKey
     }, function() {
-        console.log('Options saved.');
+        console.log('Ayarlar kaydedildi.');
         alert('Kısayol tuşları ayarlandı.');
     });
 }
@@ -42,3 +42,21 @@ function restoreOptions() {
 
 document.addEventListener('DOMContentLoaded', restoreOptions);
 document.getElementById('save').addEventListener('click', saveOptions);
+
+document.getElementById('toggleCSS').addEventListener('change', function() {
+    const shouldEnableCSS = this.checked;
+    chrome.storage.local.set({cssEnabled: shouldEnableCSS}, function() {
+        console.log('CSS aktif edildi mi?', shouldEnableCSS);
+    });
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+        chrome.tabs.sendMessage(tabs[0].id, {action: "toggleCSS", enable: shouldEnableCSS});
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    chrome.storage.local.get(['cssEnabled'], function(result) {
+        if (result.hasOwnProperty('cssEnabled')) {
+            document.getElementById('toggleCSS').checked = result.cssEnabled;
+        }
+    });
+});

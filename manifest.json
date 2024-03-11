@@ -2,12 +2,17 @@
     "manifest_version": 3,
     "name": "Velutan Zar v3.0",
     "version": "3.0",
-    "permissions": ["storage", "activeTab"],
+    "permissions": ["storage", "activeTab", "scripting"],
+    "web_accessible_resources": [
+      {
+          "resources": ["css/velutanStyle.css"],
+          "matches": ["https://www.dndbeyond.com/*"]
+      }
+    ],
     "content_scripts": [
       {
         "matches": ["https://www.dndbeyond.com/*"],
-        "js": ["content.js"],
-        "css": ["styles/velutanStyle.css"]
+        "js": ["content.js"]
       }
     ],
     "action": {
