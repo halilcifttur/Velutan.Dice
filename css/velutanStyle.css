@@ -69,12 +69,7 @@ span.dice_result__divider.dice_result__divider-- {
 	display: none;
 }
 
-.dice_result__info__results > span.dice-icon-die.dice-icon-die--d20 {
-	padding-left: 25px;
-	background-color: darkred;
-}
-
-.dice_result__info__results > span.dice-icon-die.dice-icon-die--d12 {
+.dice_result__info__results > span.dice-icon-die {
 	padding-left: 25px;
 	background-color: darkred;
 }
