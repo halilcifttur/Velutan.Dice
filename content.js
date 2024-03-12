@@ -54,7 +54,6 @@ chrome.storage.local.get(['cssEnabled'], function(result) {
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     if (request.action === "toggleCSS") {
-        console.log('CSS Aktif Edildi Mi?', request.enable);
         if (request.enable) {
             injectCustomCSS();
         } else {
@@ -71,11 +70,40 @@ function injectCustomCSS() {
     link.setAttribute('type', 'text/css');
     link.setAttribute('href', cssFilePath);
     document.head.appendChild(link);
+    console.log('CSS Aktif Edildi');
+    positionDiceNotification();
 }
 
 function removeCustomCSS() {
     const cssLink = document.getElementById('customInjectedCSS');
+    const diceNotifyPos = document.getElementById('diceNotificationPositionCSS');
     if (cssLink) {
         cssLink.remove();
+    }
+    if (diceNotifyPos) {
+        diceNotifyPos.remove();
+        console.log('CSS Devre Dışı');
+    }
+}
+
+
+function positionDiceNotification()
+{
+    const windowWidth = window.innerWidth;
+    const style = document.createElement('style');
+    style.setAttribute('id', 'diceNotificationPositionCSS');
+    if (windowWidth == 1920) {
+        style.textContent = `div.noty_layout {left: -1068px;}`;
+        console.log("1920 piksel için zar bilgisi ekranı sola kaydırıldı.");
+        document.head.appendChild(style);
+    }
+    else if (windowWidth == 2560) {
+        style.textContent = `div.noty_layout {left: -1518px;}`;
+        console.log("2560 piksel için zar bilgisi ekranı sola kaydırıldı.");
+        document.head.appendChild(style);
+    }
+    else
+    {
+        return;
     }
 }

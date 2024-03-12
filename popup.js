@@ -1,3 +1,5 @@
+// Kısayol Tuşlarını Ayarlama
+
 function saveOptions() {
     const d20ShortcutKey = document.getElementById('d20ShortcutKey').value;
     const d12ShortcutKey = document.getElementById('d12ShortcutKey').value;
@@ -42,6 +44,8 @@ function restoreOptions() {
 
 document.addEventListener('DOMContentLoaded', restoreOptions);
 document.getElementById('save').addEventListener('click', saveOptions);
+
+// CSS Aktifleştirme 
 
 document.getElementById('toggleCSS').addEventListener('change', function() {
     const shouldEnableCSS = this.checked;
