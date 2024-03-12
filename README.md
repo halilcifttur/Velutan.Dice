@@ -15,7 +15,7 @@ Chrome extension developed for use in Swaggybark's Velutan FRP live stream. The 
 5. Click the "Load unpacked" button from the left
 6. Select the folder that you extracted before
 
-   [How To Install Video](https://youtu.be/sRCcPg5wmbM)
+   [How To Install Video](https://youtu.be/Vwsq1A9TWVg)
 
 ## How to Use:
 
