@@ -46,7 +46,6 @@ document.addEventListener('DOMContentLoaded', restoreOptions);
 document.getElementById('save').addEventListener('click', saveOptions);
 
 // CSS Aktifleştirme 
-
 document.getElementById('toggleCSS').addEventListener('change', function() {
     const shouldEnableCSS = this.checked;
     chrome.storage.local.set({cssEnabled: shouldEnableCSS}, function() {
@@ -63,4 +62,32 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('toggleCSS').checked = result.cssEnabled;
         }
     });
+});
+
+// Zar Bildirim Ekranı Pozisyonunu Ayarlama
+document.addEventListener('DOMContentLoaded', function() {
+
+    const diceNotifyPos = document.getElementById('diceNotifyPos');
+    const defaultValue = 1068;
+
+    chrome.storage.local.get(['diceNotifyPosValue'], function(result) {
+        diceNotifyPos.value = result.diceNotifyPosValue || defaultValue;
+        sendMessageToContent({inputValue: diceNotifyPos.value});
+    });
+
+    diceNotifyPos.addEventListener('input', function() {
+        this.value = this.value.replace(/[^0-9]/g, '');
+        const value = diceNotifyPos.value;
+        if (value.length > 4) {
+            this.value = value.slice(0, 4);
+        }
+        chrome.storage.local.set({diceNotifyPosValue: this.value});
+        sendMessageToContent({inputValue: this.value});
+    });
+
+    function sendMessageToContent(message) {
+        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+            chrome.tabs.sendMessage(tabs[0].id, message);
+        });
+    }
 });

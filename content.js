@@ -1,3 +1,4 @@
+// Kısayol Tuşlarını Ayarlama
 document.addEventListener('keydown', function(event) {
     chrome.storage.sync.get({
         d20ShortcutKey: 'R', // Varsayılan Değer
@@ -44,6 +45,7 @@ document.addEventListener('keydown', function(event) {
     });
 });
 
+// CSS Aktifleştirme 
 chrome.storage.local.get(['cssEnabled'], function(result) {
     if (result.hasOwnProperty('cssEnabled') && result.cssEnabled) {
         injectCustomCSS();
@@ -70,40 +72,50 @@ function injectCustomCSS() {
     link.setAttribute('type', 'text/css');
     link.setAttribute('href', cssFilePath);
     document.head.appendChild(link);
+    applySavedStyle();
     console.log('CSS Aktif Edildi');
-    positionDiceNotification();
 }
 
 function removeCustomCSS() {
     const cssLink = document.getElementById('customInjectedCSS');
-    const diceNotifyPos = document.getElementById('diceNotificationPositionCSS');
+    const posStyle = document.getElementById('diceNotifyPosStyle');
     if (cssLink) {
         cssLink.remove();
     }
-    if (diceNotifyPos) {
-        diceNotifyPos.remove();
-        console.log('CSS Devre Dışı');
+    if (posStyle) {
+        posStyle.remove();
     }
 }
 
+// Zar Bildirim Ekranı Pozisyonunu Ayarlama
+function applyCustomStyle(css) {
+    const styleId = 'diceNotifyPosStyle';
+    let styleElement = document.getElementById(styleId);
 
-function positionDiceNotification()
-{
-    const windowWidth = window.innerWidth;
-    const style = document.createElement('style');
-    style.setAttribute('id', 'diceNotificationPositionCSS');
-    if (windowWidth == 1920) {
-        style.textContent = `div.noty_layout {left: -1068px;}`;
-        console.log("1920 piksel için zar bilgisi ekranı sola kaydırıldı.");
-        document.head.appendChild(style);
+    if (!styleElement) {
+        styleElement = document.createElement('style');
+        styleElement.type = 'text/css';
+        styleElement.id = styleId;
+        document.head.appendChild(styleElement);
     }
-    else if (windowWidth == 2560) {
-        style.textContent = `div.noty_layout {left: -1518px;}`;
-        console.log("2560 piksel için zar bilgisi ekranı sola kaydırıldı.");
-        document.head.appendChild(style);
-    }
-    else
-    {
-        return;
-    }
+
+    styleElement.innerHTML = css;
 }
+
+function applySavedStyle() {
+    const defaultValue = 1068;
+    chrome.storage.local.get(['diceNotifyPosValue'], function(result) {
+        const cssValue = result.diceNotifyPosValue || defaultValue;
+        const css = `div.noty_layout {left: -${cssValue}px;}`;
+        applyCustomStyle(css);
+    });
+}
+
+applySavedStyle();
+
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    if (request.inputValue !== undefined) {
+        const css = `div.noty_layout {left: -${request.inputValue}px;}`;
+        applyCustomStyle(css);
+    }
+});
