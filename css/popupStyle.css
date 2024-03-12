@@ -47,7 +47,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: -25px;
+    margin-right: -20px;
 }
 .dice-notify-window-setting-container,
 .css-toggle-container,
