@@ -102,3 +102,7 @@ span.dice_resulttotal-result.dice_resulttotal-result {
 span.dice_result__info__dicenotation {
 	margin-left: 3px;
 }
+
+#noty_layout__bottomRight {
+	bottom: 435px !important;
+}
