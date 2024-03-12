@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="css/popupStyle.css" />
   </head>
   <body>
-    <div class="inputs-container">
+    <div class="left-container">
       <label id="d20ShortcutText" for="d20ShortcutKey">d20 Zar Kısayol Tuşu:</label>
       <input type="text" id="d20ShortcutKey" placeholder="R" maxlength="1" />
 
@@ -18,6 +18,12 @@
       <input type="text" id="clearShortcutKey" placeholder="C" maxlength="1" />
     </div>
     <div class="right-container">
+      <div class="dice-notify-window-setting-container">
+        <label id="diceNotifyPosText" for="diceNotifyPos">Zar Bilgisi Pos:</label>
+      </div>
+      <div class="dice-notify-window-setting-container">
+        <input type="text" id="diceNotifyPos" placeholder="1068" maxlength="4" minlength="4" inputmode="numeric"/>
+      </div>
       <div class="css-toggle-container">
         <label for="toggleCSS">CSS'i Etkinleştir:</label>
         <input id="toggleCSS" type="checkbox"/>

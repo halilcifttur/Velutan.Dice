@@ -91,9 +91,9 @@ text-align: center;
 }
 
 .dice_result__total-container {
-  padding-left: 0px; 
-  padding-right: 0px;
-  width: 100px;
+  padding-left: 0px !important; 
+  padding-right: 0px !important;
+  width: 100px !important;
 }
 
 span.dice_result__info__dicenotation {

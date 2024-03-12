@@ -1,3 +1,4 @@
+// Kısayol Tuşlarını Ayarlama
 document.addEventListener('keydown', function(event) {
     chrome.storage.sync.get({
         d20ShortcutKey: 'R', // Varsayılan Değer
@@ -44,6 +45,7 @@ document.addEventListener('keydown', function(event) {
     });
 });
 
+// CSS Aktifleştirme 
 chrome.storage.local.get(['cssEnabled'], function(result) {
     if (result.hasOwnProperty('cssEnabled') && result.cssEnabled) {
         injectCustomCSS();
@@ -54,7 +56,6 @@ chrome.storage.local.get(['cssEnabled'], function(result) {
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     if (request.action === "toggleCSS") {
-        console.log('CSS Aktif Edildi Mi?', request.enable);
         if (request.enable) {
             injectCustomCSS();
         } else {
@@ -71,11 +72,50 @@ function injectCustomCSS() {
     link.setAttribute('type', 'text/css');
     link.setAttribute('href', cssFilePath);
     document.head.appendChild(link);
+    applySavedStyle();
+    console.log('CSS Aktif Edildi');
 }
 
 function removeCustomCSS() {
     const cssLink = document.getElementById('customInjectedCSS');
+    const posStyle = document.getElementById('diceNotifyPosStyle');
     if (cssLink) {
         cssLink.remove();
     }
+    if (posStyle) {
+        posStyle.remove();
+    }
 }
+
+// Zar Bildirim Ekranı Pozisyonunu Ayarlama
+function applyCustomStyle(css) {
+    const styleId = 'diceNotifyPosStyle';
+    let styleElement = document.getElementById(styleId);
+
+    if (!styleElement) {
+        styleElement = document.createElement('style');
+        styleElement.type = 'text/css';
+        styleElement.id = styleId;
+        document.head.appendChild(styleElement);
+    }
+
+    styleElement.innerHTML = css;
+}
+
+function applySavedStyle() {
+    const defaultValue = 1068;
+    chrome.storage.local.get(['diceNotifyPosValue'], function(result) {
+        const cssValue = result.diceNotifyPosValue || defaultValue;
+        const css = `div.noty_layout {left: -${cssValue}px;}`;
+        applyCustomStyle(css);
+    });
+}
+
+applySavedStyle();
+
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    if (request.inputValue !== undefined) {
+        const css = `div.noty_layout {left: -${request.inputValue}px;}`;
+        applyCustomStyle(css);
+    }
+});
