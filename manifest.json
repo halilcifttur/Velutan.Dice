@@ -1,5 +1,5 @@
 {
-    "manifest_version": 0.1,
+    "manifest_version": 3,
     "name": "Velutan Zar",
     "version": "1.0",
     "permissions": ["storage", "activeTab", "scripting", "windows"],
