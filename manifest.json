@@ -1,7 +1,7 @@
 {
-    "manifest_version": 3,
-    "name": "Velutan Zar v3.0",
-    "version": "3.0",
+    "manifest_version": 0.1,
+    "name": "Velutan Zar",
+    "version": "1.0",
     "permissions": ["storage", "activeTab", "scripting", "windows"],
     "web_accessible_resources": [
       {
@@ -28,5 +28,6 @@
       "16": "images/icon16.png",
       "48": "images/icon48.png",
       "128": "images/icon128.png"
-    }
+    },
+    "description": "This extension offers quick and customizable keyboard shortcuts for dice rolling and UI customization for D&D Beyond."
   }  
