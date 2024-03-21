@@ -106,3 +106,7 @@ span.dice_result__info__dicenotation {
 #noty_layout__bottomRight {
 	bottom: 435px !important;
 }
+
+.ct-sidebar__inner {
+	display: none !important;
+}
